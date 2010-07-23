@@ -1005,7 +1005,7 @@
 				);
 				PRODUCT_NAME = "${TARGET_NAME}";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
-				SDKROOT = iphoneos3.2;
+				SDKROOT = iphoneos4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -1065,7 +1065,7 @@
 				);
 				PRODUCT_NAME = "${TARGET_NAME}";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
-				SDKROOT = iphoneos3.2;
+				SDKROOT = iphoneos4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
@@ -1081,8 +1081,8 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				PREBINDING = NO;
 				PRODUCT_NAME = "Kunst Bauen";
-				SDKROOT = iphonesimulator3.2;
-				TARGETED_DEVICE_FAMILY = 2;
+				SDKROOT = iphonesimulator4.0;
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Distribution;
 		};
@@ -1137,8 +1137,8 @@
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "${TARGET_NAME}";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "020BB31D-ECBB-4021-B04C-E22B3125E1C4";
-				SDKROOT = iphoneos3.2;
-				TARGETED_DEVICE_FAMILY = 2;
+				SDKROOT = iphoneos4.0;
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Distribution;
 		};
@@ -1161,8 +1161,8 @@
 				PREBINDING = NO;
 				PRODUCT_NAME = "Kunst Bauen";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
-				SDKROOT = iphonesimulator3.2;
-				TARGETED_DEVICE_FAMILY = 2;
+				SDKROOT = iphonesimulator4.0;
+				TARGETED_DEVICE_FAMILY = 1;
 				WARNING_LDFLAGS = "";
 			};
 			name = Debug;
@@ -1179,8 +1179,8 @@
 				PREBINDING = NO;
 				PRODUCT_NAME = "Kunst Bauen";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
-				SDKROOT = iphonesimulator3.2;
-				TARGETED_DEVICE_FAMILY = 2;
+				SDKROOT = iphonesimulator4.0;
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};
