@@ -8,13 +8,18 @@
  */
 
 #include "Instructions.h"
+#import "DeviceDetection.h"
 
 void Instructions::setup(){
 	ofBackground(255,255,255);	
 	
 	string path;
 	
-	if(UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad){
+	int screenType = [DeviceDetection detectScreen];
+	NSLog(@"HEY: %@", [[UIDevice currentDevice] model]);
+
+	
+	if(screenType == SCREEN_IPAD_GEN1){
 		path = "ipad/";
 		instructionsButton = new Button(117, 353, path + "instructions-up.png",  path + "instructions-down.png");
 		playButton = new Button(117, 497, path + "play-up-main-menu.png",  path + "play-down-main-menu.png"); 
@@ -24,27 +29,42 @@ void Instructions::setup(){
 		
 	} else{
 		path = "iphone/";
-		instructionsButton = new Button(30, 175, path + "instructions-up.png",  path + "instructions-down.png");
-		playButton = new Button(30, 250, path + "play-up-main-menu.png",  path + "play-down-main-menu.png"); 
-		smallPlayButton = new Button(200, 410,  path + "play-up.png",  path + "play-down.png");
-		backButton = new Button(30, 410,  path + "back-up.png",  path + "back-down.png");
-		nextButton = new Button(200, 410,  path + "next-up.png",  path + "next-down.png");
+		if (screenType == SCREEN_RETINA) {
+			instructionsButton = new Button(30, 175, path + "instructions-up-hd.png",  path + "instructions-down-hd.png");
+			playButton = new Button(30, 250, path + "play-up-main-menu-hd.png",  path + "play-down-main-menu-hd.png"); 
+			smallPlayButton = new Button(200, 410,  path + "play-up-hd.png",  path + "play-down-hd.png");
+			backButton = new Button(30, 410,  path + "back-up-hd.png",  path + "back-down-hd.png");
+			nextButton = new Button(200, 410,  path + "next-up-hd.png",  path + "next-down-hd.png");
+			
+		} else  {
+			instructionsButton = new Button(30, 175, path + "instructions-up.png",  path + "instructions-down.png");
+			playButton = new Button(30, 250, path + "play-up-main-menu.png",  path + "play-down-main-menu.png"); 
+			smallPlayButton = new Button(200, 410,  path + "play-up.png",  path + "play-down.png");
+			backButton = new Button(30, 410,  path + "back-up.png",  path + "back-down.png");
+			nextButton = new Button(200, 410,  path + "next-up.png",  path + "next-down.png");
+		} 
+		
 		
 	}
 	
 	
-		
-	mmBackground.loadImage( path + "main-menu-bg.png");	
-	dragBackground.loadImage( path + "drag-bg.png");
-	touchBackground.loadImage( path + "touch-bg.png");
-	doubleTapBackground.loadImage( path + "double-tap-bg.png");
+	if (screenType == SCREEN_RETINA) {
+		mmBackground.loadImage( path + "main-menu-bg-hd.png");	
+		dragBackground.loadImage( path + "drag-bg-hd.png");
+		touchBackground.loadImage( path + "touch-bg-hd.png");
+		doubleTapBackground.loadImage( path + "double-tap-bg-hd.png");
+	}else{	
+		mmBackground.loadImage( path + "main-menu-bg.png");	
+		dragBackground.loadImage( path + "drag-bg.png");
+		touchBackground.loadImage( path + "touch-bg.png");
+		doubleTapBackground.loadImage( path + "double-tap-bg.png");
+	}
 	
 	state = MAIN_MENU;
 	
 	if(UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad){
 		[[UIDevice currentDevice] beginGeneratingDeviceOrientationNotifications];
 	} 
-
 }
 
 
@@ -54,6 +74,10 @@ void Instructions::update(){
 }
 
 void Instructions::draw(){
+	if ([DeviceDetection detectScreen] == SCREEN_RETINA){
+		ofScale(0.5, 0.5, 0.5);
+	}
+	
 	ofPushMatrix();
 	ofBackground(128, 128, 128);
 	
@@ -111,13 +135,13 @@ void Instructions::draw(){
 	
 }
 
-void Instructions::touchDown(int x, int y, int id){
 
+void Instructions::touchDown(int x, int y, int id){
 	checkButtons(x, y);
 	
-
 	touchHappening = true;
 }
+
 
 void Instructions::touchUp(int x, int y, int id){
 	getLandscapeCoordinates(&x, &y, [UIDevice currentDevice].orientation);
@@ -158,6 +182,7 @@ void Instructions::touchUp(int x, int y, int id){
 	touchHappening = false;
 }
 
+
 void Instructions::touchMoved(int x, int y, int id){	
 	mouseX = x;
 	mouseY = y;
@@ -185,6 +210,7 @@ void Instructions::checkButtons(int x, int y){
 	}
 }
 
+
 void Instructions::getLandscapeCoordinates(int* xPtr, int* yPtr, UIDeviceOrientation orientation){
     if (orientation == UIDeviceOrientationLandscapeLeft || orientation == UIDeviceOrientationLandscapeRight) {
 		float ratio = 1024.0/768.0;
@@ -211,6 +237,7 @@ void Instructions::getLandscapeCoordinates(int* xPtr, int* yPtr, UIDeviceOrienta
 	rotX = *xPtr;
 	rotY = *yPtr;
 }
+
 
 bool Instructions::isPlayState(){
 	if (state == PLAY) {

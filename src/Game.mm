@@ -8,23 +8,29 @@
  */
 
 #include "Game.h"
-
+#import "DeviceDetection.h"
 
 
 //--------------------------------------------------------------
 void Game::setup(){	
-	int device = ((UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) ? IPAD : IPHONE);
-	
-	if (device == IPAD) {
+	int screenType = [DeviceDetection detectScreen];
+
+	if (screenType == SCREEN_IPAD_GEN1) {
 		squareSize = 150;
 		speed = 10;
 		destroyThreshold = 1000;
-	} else if (device == IPHONE) {
+	} else if( screenType == SCREEN_RETINA){
+		squareSize = 150;
+		speed = 10;
+		destroyThreshold = 1000;
+	} else if (screenType == SCREEN_IPHONE_GEN1) {
+		//NSLog(@"%f , %f, %f", (float)ofGetScreenWidth(), (float)[[UIScreen mainScreen] scale], (float)(ofGetScreenWidth() * [[UIScreen mainScreen] scale]));			
 		squareSize = 80;
 		speed = 10;
 		destroyThreshold = 400;
 	}
 		
+	pathPositionEnd = 0;
 	spline.setInterpolation(OFX_MSA_SPLINE_LINEAR);
 	ignoreNextTouch = false;
 }
@@ -41,7 +47,7 @@ void Game::update() {
 	
 	squares.clear();
 	pathPositionEnd = pathPositionEnd > path.segStrokeIndex - (speed) ? path.segStrokeIndex - speed : pathPositionEnd;
-	
+
 	for(pathPosition = pathPositionStart; pathPosition < pathPositionEnd; pathPosition += speed){
 		//printf("pathPosition: %d, strokeIndex:%d\n", pathPosition,  path.segStrokeIndex);
 		
@@ -75,11 +81,14 @@ void Game::update() {
 
 //--------------------------------------------------------------
 void Game::draw() {
-	//mvButtons.draw();
+	if ([DeviceDetection detectScreen] == SCREEN_RETINA){
+		ofScale(0.5, 0.5, 0.5);
+	}
 	
 	list<Square>::iterator iter;
 	for(iter = squares.begin(); iter != squares.end(); iter++){
-		iter->draw();		
+		iter->draw();	
+		//printf("drawing  ");
 	}
 	//printf("%f\n", ofGetFrameRate());
 	
@@ -110,7 +119,11 @@ void Game::exit() {
 
 //--------------------------------------------------------------
 void Game::touchDown(int x, int y, int id){
-	//printf("touch %i down at (%i,%i)\n", id, x,y);
+	printf("touch %i down at (%i,%i)\n", id, x,y);
+	if ([DeviceDetection detectScreen] == SCREEN_RETINA) {
+		x = x * 2;
+		y = y * 2;
+	}
 	if (id == 0) {
 		if(!ignoreNextTouch){	//for double tap
 			spline.push_back(ofxVec2f(x, y));
@@ -124,6 +137,10 @@ void Game::touchDown(int x, int y, int id){
 
 //--------------------------------------------------------------
 void Game::touchMoved(int x, int y, int id){
+	if ([DeviceDetection detectScreen] == SCREEN_RETINA) {
+		x = x * 2;
+		y = y * 2;
+	}
 	//dissallow multitouch
 	if (id == 0) {
 		spline.push_back(ofxVec2f(x, y));
@@ -134,12 +151,21 @@ void Game::touchMoved(int x, int y, int id){
 //--------------------------------------------------------------
 void Game::touchUp(int x, int y, int id){
 	//printf("touch %i up at (%i,%i)\n", id, x, y);
+	if ([DeviceDetection detectScreen] == SCREEN_RETINA) {
+		x = x * 2;
+		y = y * 2;
+	}
 	touchesMoving = false;
 }
 
 //--------------------------------------------------------------
 void Game::touchDoubleTap(int x, int y, int id){
 	//printf("touch %i double tap at (%i,%i)\n", id, x, y);
+	if ([DeviceDetection detectScreen] == SCREEN_RETINA) {
+		x = x * 2;
+		y = y * 2;
+	}
+	
 	pathPosition =0;
 	frameCounter = 0;
 	squares.clear();

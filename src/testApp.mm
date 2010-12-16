@@ -1,7 +1,17 @@
 #include "testApp.h"
+#include "FlurryAPI.h"
+#include "Appirater.h"
 
 //--------------------------------------------------------------
 void testApp::setup(){	
+	//iPhone
+	[FlurryAPI startSession:@"7S6Z2K8IMY3Z1R4GFFRT"];
+	
+	//iPad
+	//[FlurryAPI startSession:@"KTC2CLWV9IAL15FKY821"];
+	
+	[Appirater appLaunched];
+	
 	// register touch events
 	ofxRegisterMultitouch(this);
 	
