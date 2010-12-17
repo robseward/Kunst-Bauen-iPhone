@@ -16,7 +16,6 @@ void Instructions::setup(){
 	string path;
 	
 	int screenType = [DeviceDetection detectScreen];
-	NSLog(@"HEY: %@", [[UIDevice currentDevice] model]);
 
 	
 	if(screenType == SCREEN_IPAD_GEN1){

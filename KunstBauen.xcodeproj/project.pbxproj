@@ -1217,6 +1217,72 @@
 			};
 			name = Release;
 		};
+		D4EF4E2612BBF77000253A89 /* Distribution */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: VHS Design LLC";
+				COMPRESS_PNG_FILES = NO;
+				GCC_C_LANGUAGE_STANDARD = c99;
+				GCC_DYNAMIC_NO_PIC = YES;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_THUMB_SUPPORT = NO;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = (
+					../../../libs/poco/include,
+					"../../../addons/ofxAccelerometer/**",
+					"../../../addons/ofxMultitouch/**",
+					"../../../addons/ofxiPhone/**",
+					"../../../libs/openFrameworks/**",
+					"../../../libs/freetype/**",
+				);
+				IPHONEOS_DEPLOYMENT_TARGET = 3.1;
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/../../../libs/freetype/lib\"",
+					"\"$(SRCROOT)/../../../libs/freeimage/lib\"",
+					"\"$(SRCROOT)/../../../libs/FreeImage/lib/iphone\"",
+					"\"$(SRCROOT)/../../../libs/FreeImage/lib/osx\"",
+					"\"$(SRCROOT)/../../../libs/freetype/lib/iphone\"",
+					"\"$(SRCROOT)/../../../libs/freetype/lib/osx\"",
+					"\"$(SRCROOT)/../../../libs/glu/lib/iphone\"",
+					"\"$(SRCROOT)/../../../libs/poco/lib/osx\"",
+					"\"$(SRCROOT)/../../../libs/poco/lib/iphone\"",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 10.5;
+				ONLY_ACTIVE_ARCH = NO;
+				OTHER_LDFLAGS = "-ObjC";
+				PREBINDING = NO;
+				PROVISIONING_PROFILE = "";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "020BB31D-ECBB-4021-B04C-E22B3125E1C4";
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = Distribution;
+		};
+		D4EF4E2712BBF77000253A89 /* Distribution */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = iPhone_Prefix.pch;
+				GCC_THUMB_SUPPORT = NO;
+				INFOPLIST_FILE = "ofxiphone-Info.plist";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/../../../libs/freetype/lib/osx\"",
+					"\"$(SRCROOT)/FlurryLib\"",
+					"\"$(SRCROOT)/FreeImage/lib/iphone\"",
+				);
+				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_NAME = "${TARGET_NAME}";
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Distribution;
+		};
 		E49BCC2F12554938009F19D0 /* ReleaseArmv7 */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -1289,6 +1355,7 @@
 			buildConfigurations = (
 				1D6058940D05DD3E006BFB54 /* Debug */,
 				1D6058950D05DD3E006BFB54 /* Release */,
+				D4EF4E2712BBF77000253A89 /* Distribution */,
 				E49BCC3012554938009F19D0 /* ReleaseArmv7 */,
 			);
 			defaultConfigurationIsVisible = 0;
@@ -1299,6 +1366,7 @@
 			buildConfigurations = (
 				C01FCF4F08A954540054247B /* Debug */,
 				C01FCF5008A954540054247B /* Release */,
+				D4EF4E2612BBF77000253A89 /* Distribution */,
 				E49BCC2F12554938009F19D0 /* ReleaseArmv7 */,
 			);
 			defaultConfigurationIsVisible = 0;
